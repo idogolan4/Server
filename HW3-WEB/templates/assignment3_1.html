@@ -1,0 +1,28 @@
+{% extends 'FirstPage-1.HTML' %}
+
+{% block Headline %}
+    {{ super() }}
+    <img src="../static/img/hobbies.jpg" alt="hobbieImage" id="hobbieimage"><br>
+{% endblock %}
+
+{% block assignment3_1 %}
+    {% set page_name= 'assignment3_1-Page' %}
+    <!Condition>
+    {% if curr_user %}
+        <h1 id="HowAreYouTitle">How Are You {{ curr_user.firstname | upper }} {{ curr_user.lastname | upper }}? </h1>
+        <!Filter-1>
+    {% else %}
+        <h1 id="HowAreYouTitle">How Are You Dear Guest?</h1>
+    {% endif %}
+
+    <!Loop Condition>
+    <h2 id="hobbieTitle">My Favorite hobbies: </h2>
+    <ol>
+        {% for hobby in hobbies %}
+            <li id="hobbyList">{{ hobby | capitalize }}</li> <!Filter-2>
+        {% endfor %}
+    </ol>
+{% endblock %}
+
+</body>
+</html>
