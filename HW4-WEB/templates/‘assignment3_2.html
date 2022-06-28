@@ -1,0 +1,63 @@
+{% extends 'FirstPage-1.HTML' %}
+
+
+{% block body %}
+    <br>
+    <div class="FormBlock">
+        <h1 id="FormTitle">Users Form</h1>
+        <h3>Please fill in all the cells</h3><br>
+        <form method="GET" action="/assignment3_2" id="UsersForm">
+            <label for="User name">User name</label><br>
+            <input type="text" name="name" placeholder="username"><br>
+            <label for="Last name">Last name</label><br>
+            <input type="text" name="lastname" placeholder="lastname"><br>
+            <label for="Email">Email</label><br>
+            <input type="email" name="email" placeholder="email"><br>
+            <input class="btn1" type="submit" value="Search">
+        </form>
+
+        {% if name and lastname and email %}
+            <h2> Name: {{ name | capitalize }}</h2>
+            <h2>Lastname: {{ lastname | capitalize }} </h2>
+            <h2>Email: {{ email }} </h2>
+        {% endif %}
+
+        {% if message %}
+            <h3 style="color: red">{{ message }}</h3>
+        {% endif %}
+
+        {% if Users_dict %}
+            <ol>
+                {% for k,v in Users_dict.items() %}
+                    <li><h2>{{ k | capitalize }}</h2></li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    </div>
+    <br>
+
+    <div class="FormBlock">
+        {% if session['username'] %}
+            <h3>welcome, {{ session['username'] }}</h3>
+            What would you like to do now?
+        {% else %}
+            <br>
+            <h1 id="FormTitle">Registration Form</h1>
+            <h3>welcome , please register!</h3><br>
+            <form method="POST" action="/assignment3_2" id="RegistrationForm">
+                <label for="User name">User name</label><br>
+                <input name="username" type="text" placeholder="username"><br>
+                <label for="password">password</label><br>
+                <input name="password" type="password" placeholder="password"><br>
+                <input type="submit" class="btn1">
+            </form>
+
+        {% endif %}
+
+        {% if message %}
+            <h3 style="color: red">{{ message }}</h3>
+        {% endif %}
+        <br>
+    </div>
+
+{% endblock %}

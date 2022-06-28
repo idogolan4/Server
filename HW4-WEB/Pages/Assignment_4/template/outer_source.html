@@ -1,0 +1,35 @@
+{% extends 'FirstPage-1.HTML' %}
+{% include('include_js2.html') %}
+
+{% block body %}
+
+    <br>
+    <div class="FormBlock">
+        <h1>Frontend</h1>
+        <form id="frontend-request" onsubmit="event.preventDefault()">
+            <label for="User name">ID:</label>
+            <input id="user_number" type="number" name="user_number" placeholder="Username ID 1-12" required>
+            <button class="btn1" onclick="getUser()"> Submit</button>
+        </form>
+
+
+        <form id="backend-request" action="/assignment_4/outer_source/fetch_backend" method="get">
+            <h1>Backend</h1>
+             <label for="User name">ID:</label>
+            <input id="user_id" type="number" name="user_id" placeholder="Username ID 1-12" required >
+            <input type="submit" class="btn1" value="Submit"/>
+        </form>
+    </div>
+
+
+    <div id="place_holder_for_response"></div>
+    <br>
+
+    {% if request_data %}
+        <h3> {{ request_data.first_name }} {{ request_data.last_name }} </h3>
+        <h4> {{ request_data.email }} </h4>
+        <img src="{{ request_data.avatar }}" alt="Profile Picture"/>
+    {% endif %}
+    </div>
+
+{% endblock %}

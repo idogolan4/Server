@@ -1,0 +1,57 @@
+{% extends 'FirstPage-1.HTML' %}
+
+{% block body %}
+    <br>
+    <div class="FormBlock">
+        <h2 id="FormTitle"> Insert Form:</h2>
+        <form action="/insert_user" method="POST" id="UsersForm">
+            <label for="User name">User name</label><br>
+            <input type="text" name="name" placeholder="username"><br>
+            <label for="Last name">Last name</label><br>
+            <input type="text" name="lastname" placeholder="lastname"><br>
+            <label for="Email">Email</label><br>
+            <input type="email" name="email" placeholder="email"><br>
+            <input class="btn1" type="submit" value="insert">
+        </form>
+               {% if message2 %}
+            <h3 style="color: #3ccc58">{{ message2 }}</h3>
+        {% endif %}
+    </div>
+    <br>
+     <div class="FormBlock">
+        <h2 id="FormTitle"> UPDATE Form:</h2>
+        <br>
+        <form action="/update_user"  method="POST">
+            <label for="User name">User name</label><br>
+            <input type="text" name="name" placeholder="username"><br>
+            <label for="Last name">Last name</label><br>
+            <input type="text" name="lastname" placeholder="lastname"><br>
+            <label for="Email">Email</label><br>
+            <input type="email" name="email" placeholder="email"><br>
+            <input class="btn1" type="submit" value="update">
+        </form>
+        <br>
+           {% if message1 %}
+            <h3 style="color: #3ccc58">{{ message1 }}</h3>
+        {% endif %}
+    </div>
+    <br>
+    <div class="FormBlock">
+        <h2 id="FormTitle"> READ Form:</h2>
+        <br>
+        {% for user in users %}
+            <h3>name: {{ user.name }}</h3>
+            <h3>lastname: {{ user.lastname }}</h3>
+            <h3>email: {{ user.email }}</h3>
+
+            <form action="/delete_user" method="POST">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <input class="btn1" type="submit" value="Delete">
+            </form>
+            <br>
+        {% endfor %}
+      {% if message %}
+            <h3 style="color: red">{{ message }}</h3>
+        {% endif %}
+    </div>
+{% endblock %}

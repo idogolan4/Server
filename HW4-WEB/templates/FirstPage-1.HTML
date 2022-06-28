@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include('include_css.html') %}
+    {% include('include_js.html') %}
+
+    <title>IdoGolanOfficeMainPage</title>
+</head>
+<body>
+<div class="Container">
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('FirstPage') }}">Home</a></li>
+                <li><a href="{{ url_for('ContactPage') }}">Contact Us</a></li>
+                <li><a href="{{ url_for('FAQ') }}">FAQ</a></li>
+                <li><a href="{{ url_for('assignment3_1') }}">Assignment3_1</a></li>
+                {% if session['username'] %}
+                    <li><a href="{{ url_for('Logout_func') }}">Log-out</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('assignment3_2') }}">Assignment3_2</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('assignment_4.assignment4_func') }}">Assignment_4</a></li>
+                <li><a href="{{ url_for('assignment_4.users_response') }}">Users</a></li>
+                <li><a href="{{ url_for('assignment_4.outer_source') }}">Outer_Source</a></li>
+                <li><a href="{{ url_for('assignment_4.restapi_users') }}">restapi_users</a></li>
+
+            </ul>
+        </nav>
+    </div>
+</div>
+
+{% if session['username'] %}
+    <h2>Active user: {{ session['username'] }} </h2>
+{% endif %}
+
+{% block body %}
+
+    <h1 id="header">Ido Golan Office</h1><br>
+    {% block Headline %}
+        <div class="headline">Hello, Welcome to my Website</div><br>
+    {% endblock %}
+
+    {% block assignment3_1 %}
+        <img src="../static/img/office.jpg" alt="OfficePicture"><br>
+        <script>
+            var i = 0;
+            var txt = 'This is the best office website you will ever visit, Welcome !!';
+            var speed = 50;
+
+            function typeWriter() {
+                if (i < txt.length) {
+                    document.getElementById("demo").innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+        </script>
+        <button onclick="typeWriter()" id="typeWriter">Click Here Please</button>
+        <p id="demo"></p>
+    {% endblock %}
+
+{% endblock %}
+</body>
+</html>
